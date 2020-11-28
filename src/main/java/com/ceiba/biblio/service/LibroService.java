@@ -23,7 +23,7 @@ public class LibroService {
         if(esPalindrome(libro.getIsbn())){
             return ResponseEntity.ok("es palindrome");
         }else{
-            return null;
+            return ResponseEntity.badRequest().body("MAL");
         }
 
     }
