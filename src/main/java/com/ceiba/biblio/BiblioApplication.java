@@ -1,4 +1,4 @@
-package com.cieba.biblio;
+package com.ceiba.biblio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
 package com.cieba.biblio.repository;
 
-import com.cieba.biblio.model.LibroEntity;
+import com.ceiba.biblio.model.LibroEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
