@@ -20,7 +20,7 @@ public class LibroController {
         return libroService.getInfo();
     }
 
-    @PostMapping("/crear")
+    @PostMapping("/crearLibro")
     public ResponseEntity crearLibro(@RequestBody LibroInDto libro){
         return  libroService.crearLibro(libro);
     }

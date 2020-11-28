@@ -1,9 +1,10 @@
 package com.ceiba.biblio.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
-import lombok.Data;
 
 @Entity(name = "Libro")
 @Data
@@ -11,7 +12,7 @@ public class LibroEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lib_id")
     private Long id;
 
@@ -33,9 +34,11 @@ public class LibroEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "lib_espalindrome")
     private boolean libEspalindrome;
+
     @Basic(optional = false)
     @Column(name = "lib_esconlimite")
     private boolean libEsconlimite;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libId", fetch = FetchType.LAZY)
     private List<PrestamoEntity> prestamoList;
 }
