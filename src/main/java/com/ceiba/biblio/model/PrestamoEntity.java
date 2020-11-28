@@ -32,12 +32,6 @@ import lombok.Data;
 @Data
 @Table(name = "prestamo")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Prestamo.findAll", query = "SELECT p FROM Prestamo p"),
-    @NamedQuery(name = "Prestamo.findByPresId", query = "SELECT p FROM Prestamo p WHERE p.presId = :presId"),
-    @NamedQuery(name = "Prestamo.findByPresNombrepersona", query = "SELECT p FROM Prestamo p WHERE p.presNombrepersona = :presNombrepersona"),
-    @NamedQuery(name = "Prestamo.findByPresFechaprestamo", query = "SELECT p FROM Prestamo p WHERE p.presFechaprestamo = :presFechaprestamo"),
-    @NamedQuery(name = "Prestamo.findByPresFechalimite", query = "SELECT p FROM Prestamo p WHERE p.presFechalimite = :presFechalimite")})
 public class PrestamoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

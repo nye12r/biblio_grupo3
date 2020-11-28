@@ -1,4 +1,4 @@
-package com.cieba.biblio;
+package com.ceiba.biblio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

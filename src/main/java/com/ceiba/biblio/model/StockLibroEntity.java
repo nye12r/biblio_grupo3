@@ -29,12 +29,6 @@ import lombok.Data;
 @Data
 @Table(name = "stocklibro")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Stocklibro.findAll", query = "SELECT s FROM Stocklibro s"),
-    @NamedQuery(name = "Stocklibro.findByStlId", query = "SELECT s FROM Stocklibro s WHERE s.stlId = :stlId"),
-    @NamedQuery(name = "Stocklibro.findByStlTotal", query = "SELECT s FROM Stocklibro s WHERE s.stlTotal = :stlTotal"),
-    @NamedQuery(name = "Stocklibro.findByStlDisponible", query = "SELECT s FROM Stocklibro s WHERE s.stlDisponible = :stlDisponible"),
-    @NamedQuery(name = "Stocklibro.findBySolPrestados", query = "SELECT s FROM Stocklibro s WHERE s.solPrestados = :solPrestados")})
 public class StockLibroEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

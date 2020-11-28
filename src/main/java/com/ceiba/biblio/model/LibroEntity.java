@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Entity(name = "Libro")
 @Data
-@NamedQuery(name = "Libro.findByIsbn", query = "SELECT libro FROM Libro libro WHERE libro.isbn = :isbn")
 public class LibroEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
