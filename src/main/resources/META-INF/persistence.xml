@@ -3,9 +3,9 @@
   <persistence-unit name="com.cieba_biblio_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.ceiba.algo.Libro</class>
-    <class>com.ceiba.algo.Prestamo</class>
-    <class>com.ceiba.algo.Stocklibro</class>
-    <class>com.ceiba.algo.Stock</class>
+    <class>com.ceiba.biblio.model.PrestamoEntity</class>
+    <class>com.ceiba.biblio.model.StockEntity</class>
+    <class>com.ceiba.biblio.model.StocklibroEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/biblioteca"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ceiba.algo;
+package com.ceiba.biblio.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -19,12 +19,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
 
 /**
  *
  * @author gustavo
  */
 @Entity
+@Data
 @Table(name = "stocklibro")
 @XmlRootElement
 @NamedQueries({
@@ -33,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Stocklibro.findByStlTotal", query = "SELECT s FROM Stocklibro s WHERE s.stlTotal = :stlTotal"),
     @NamedQuery(name = "Stocklibro.findByStlDisponible", query = "SELECT s FROM Stocklibro s WHERE s.stlDisponible = :stlDisponible"),
     @NamedQuery(name = "Stocklibro.findBySolPrestados", query = "SELECT s FROM Stocklibro s WHERE s.solPrestados = :solPrestados")})
-public class Stocklibro implements Serializable {
+public class StocklibroEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,72 +54,25 @@ public class Stocklibro implements Serializable {
     private long solPrestados;
     @JoinColumn(name = "lib_id", referencedColumnName = "lib_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Libro libId;
+    private LibroEntity libId;
     @JoinColumn(name = "sto_id", referencedColumnName = "sto_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Stock stoId;
+    private StockEntity stoId;
 
-    public Stocklibro() {
+    public StocklibroEntity() {
     }
 
-    public Stocklibro(Long stlId) {
+    public StocklibroEntity(Long stlId) {
         this.stlId = stlId;
     }
 
-    public Stocklibro(Long stlId, long stlTotal, long stlDisponible, long solPrestados) {
+    public StocklibroEntity(Long stlId, long stlTotal, long stlDisponible, long solPrestados) {
         this.stlId = stlId;
         this.stlTotal = stlTotal;
         this.stlDisponible = stlDisponible;
         this.solPrestados = solPrestados;
     }
 
-    public Long getStlId() {
-        return stlId;
-    }
-
-    public void setStlId(Long stlId) {
-        this.stlId = stlId;
-    }
-
-    public long getStlTotal() {
-        return stlTotal;
-    }
-
-    public void setStlTotal(long stlTotal) {
-        this.stlTotal = stlTotal;
-    }
-
-    public long getStlDisponible() {
-        return stlDisponible;
-    }
-
-    public void setStlDisponible(long stlDisponible) {
-        this.stlDisponible = stlDisponible;
-    }
-
-    public long getSolPrestados() {
-        return solPrestados;
-    }
-
-    public void setSolPrestados(long solPrestados) {
-        this.solPrestados = solPrestados;
-    }
-
-    public Libro getLibId() {
-        return libId;
-    }
-
-    public void setLibId(Libro libId) {
-        this.libId = libId;
-    }
-
-    public Stock getStoId() {
-        return stoId;
-    }
-
-    public void setStoId(Stock stoId) {
-        this.stoId = stoId;
-    }
 
     @Override
     public int hashCode() {
@@ -129,10 +84,10 @@ public class Stocklibro implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Stocklibro)) {
+        if (!(object instanceof StocklibroEntity)) {
             return false;
         }
-        Stocklibro other = (Stocklibro) object;
+        StocklibroEntity other = (StocklibroEntity) object;
         if ((this.stlId == null && other.stlId != null) || (this.stlId != null && !this.stlId.equals(other.stlId))) {
             return false;
         }

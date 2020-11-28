@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ceiba.algo;
+package com.ceiba.biblio.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,12 +21,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
  * @author gustavo
  */
 @Entity
+@Data
 @Table(name = "stock")
 @XmlRootElement
 @NamedQueries({
@@ -35,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Stock.findByStoTotal", query = "SELECT s FROM Stock s WHERE s.stoTotal = :stoTotal"),
     @NamedQuery(name = "Stock.findByStoDisponible", query = "SELECT s FROM Stock s WHERE s.stoDisponible = :stoDisponible"),
     @NamedQuery(name = "Stock.findByStoPrestados", query = "SELECT s FROM Stock s WHERE s.stoPrestados = :stoPrestados")})
-public class Stock implements Serializable {
+public class StockEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,62 +55,22 @@ public class Stock implements Serializable {
     @Column(name = "sto_prestados")
     private long stoPrestados;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "stoId", fetch = FetchType.LAZY)
-    private List<Stocklibro> stocklibroList;
+    private List<StocklibroEntity> stocklibroList;
 
-    public Stock() {
+    public StockEntity() {
     }
 
-    public Stock(Long stoId) {
+    public StockEntity(Long stoId) {
         this.stoId = stoId;
     }
 
-    public Stock(Long stoId, long stoTotal, long stoDisponible, long stoPrestados) {
+    public StockEntity(Long stoId, long stoTotal, long stoDisponible, long stoPrestados) {
         this.stoId = stoId;
         this.stoTotal = stoTotal;
         this.stoDisponible = stoDisponible;
         this.stoPrestados = stoPrestados;
     }
 
-    public Long getStoId() {
-        return stoId;
-    }
-
-    public void setStoId(Long stoId) {
-        this.stoId = stoId;
-    }
-
-    public long getStoTotal() {
-        return stoTotal;
-    }
-
-    public void setStoTotal(long stoTotal) {
-        this.stoTotal = stoTotal;
-    }
-
-    public long getStoDisponible() {
-        return stoDisponible;
-    }
-
-    public void setStoDisponible(long stoDisponible) {
-        this.stoDisponible = stoDisponible;
-    }
-
-    public long getStoPrestados() {
-        return stoPrestados;
-    }
-
-    public void setStoPrestados(long stoPrestados) {
-        this.stoPrestados = stoPrestados;
-    }
-
-    @XmlTransient
-    public List<Stocklibro> getStocklibroList() {
-        return stocklibroList;
-    }
-
-    public void setStocklibroList(List<Stocklibro> stocklibroList) {
-        this.stocklibroList = stocklibroList;
-    }
 
     @Override
     public int hashCode() {
@@ -120,10 +82,10 @@ public class Stock implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Stock)) {
+        if (!(object instanceof StockEntity)) {
             return false;
         }
-        Stock other = (Stock) object;
+        StockEntity other = (StockEntity) object;
         if ((this.stoId == null && other.stoId != null) || (this.stoId != null && !this.stoId.equals(other.stoId))) {
             return false;
         }

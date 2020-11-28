@@ -1,4 +1,4 @@
-package com.cieba.biblio.repository;
+package com.ceiba.biblio.repository;
 
 import com.ceiba.biblio.model.LibroEntity;
 import org.springframework.data.repository.CrudRepository;
