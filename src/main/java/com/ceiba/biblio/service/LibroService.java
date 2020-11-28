@@ -13,7 +13,7 @@ public class LibroService {
     
     public ResponseEntity getInfo(){
         
-        return "ServiciLibro";
+        return ResponseEntity.ok("ServiciLibro");
     }
     
 }
