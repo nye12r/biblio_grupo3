@@ -28,11 +28,11 @@ public class LibroService {
         LibroOutDto respuesta = new LibroOutDto();
         Optional<LibroEntity> lib = libroRepository.findByIsbn(libro.getIsbn());
 
-
         if(lib.isPresent()){
             libr=lib.get();
             libr.setTotalEjemplares(libr.getTotalEjemplares()+1);
             libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles()+1);
+            respuesta.setMensaje("Libro guardado correctamente");
         }else {
             libr = new LibroEntity();
             libr.setTotalEjemplares(Long.valueOf(1));
@@ -42,10 +42,10 @@ public class LibroService {
             libr.setLibEspalindrome(esPalindrome(libro.getIsbn()));
             libr.setLibEsconlimite(Utilidades.isOverThirty(libro.getIsbn()));
             libr.setTotalEjemplaresPrestados(Long.valueOf(0));
+            respuesta.setMensaje("Libro fue actualizado");
         }
         libroRepository.save(libr);
         respuesta.setEstado("OK");
-        respuesta.setMensaje("Libro guardado correctamente");
         return ResponseEntity.ok(respuesta);
 
     }
