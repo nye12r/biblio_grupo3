@@ -13,13 +13,45 @@ CREATE TABLE libro
     lib_id bigserial not null,
 	lib_isbn text not null,
 	lib_nombre text not null,
-	lib_total bigint not null,
-	lib_disponibles bigint not null,
 	lib_espalindrome boolean not null,
 	lib_esconlimite boolean not null,
     CONSTRAINT lib_pk PRIMARY KEY (lib_id),
-	constraint lib_uk
-		unique (lib_isbn)
+	constraint lib_uk unique (lib_isbn)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+create table stock(
+	sto_id bigserial not null,
+	sto_total bigint not null,
+	sto_disponible bigint not null,
+	sto_prestados bigint not null,
+    CONSTRAINT sto_pk PRIMARY KEY (sto_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+create table stocklibro(
+	stl_id bigserial not null,
+	stl_total bigint not null,
+	stl_disponible bigint not null,
+	sol_prestados bigint not null,
+	lib_id bigint not null,
+	sto_id bigint not null,
+    CONSTRAINT stl_pk PRIMARY KEY (stl_id),
+    CONSTRAINT stl_lib_fk FOREIGN KEY (lib_id)
+        REFERENCES libro (lib_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT stl_sto_fk FOREIGN KEY (sto_id)
+        REFERENCES stock (sto_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -35,7 +67,7 @@ CREATE TABLE prestamo
 	pres_fechaprestamo timestamp without time zone not null,
 	pres_fechaLimite timestamp without time zone,
 	lib_id bigint not null,
-    CONSTRAINT pres_pk PRIMARY KEY (pres_id,
+    CONSTRAINT pres_pk PRIMARY KEY (pres_id),
     CONSTRAINT pres_lib_fk FOREIGN KEY (lib_id)
         REFERENCES libro (lib_id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -46,3 +78,8 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+
+
+insert into stock
+(sto_total, sto_disponible, sto_prestados) values
+(0,0,0);
