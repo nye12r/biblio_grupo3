@@ -26,7 +26,7 @@ public class LibroEntity  implements Serializable {
     @Column(name = "lib_esconlimite")
     private boolean libEsconlimite;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libId", fetch = FetchType.LAZY)
-    private List<Prestamo> prestamoList;
+    private List<PrestamoEntity> prestamoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libId", fetch = FetchType.LAZY)
-    private List<Stocklibro> stocklibroList;
+    private List<StockLibroEntity> stocklibroList;
 }

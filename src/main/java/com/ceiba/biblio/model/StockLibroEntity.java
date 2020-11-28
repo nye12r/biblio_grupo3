@@ -35,7 +35,7 @@ import lombok.Data;
     @NamedQuery(name = "Stocklibro.findByStlTotal", query = "SELECT s FROM Stocklibro s WHERE s.stlTotal = :stlTotal"),
     @NamedQuery(name = "Stocklibro.findByStlDisponible", query = "SELECT s FROM Stocklibro s WHERE s.stlDisponible = :stlDisponible"),
     @NamedQuery(name = "Stocklibro.findBySolPrestados", query = "SELECT s FROM Stocklibro s WHERE s.solPrestados = :solPrestados")})
-public class StocklibroEntity implements Serializable {
+public class StockLibroEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,14 +59,14 @@ public class StocklibroEntity implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private StockEntity stoId;
 
-    public StocklibroEntity() {
+    public StockLibroEntity() {
     }
 
-    public StocklibroEntity(Long stlId) {
+    public StockLibroEntity(Long stlId) {
         this.stlId = stlId;
     }
 
-    public StocklibroEntity(Long stlId, long stlTotal, long stlDisponible, long solPrestados) {
+    public StockLibroEntity(Long stlId, long stlTotal, long stlDisponible, long solPrestados) {
         this.stlId = stlId;
         this.stlTotal = stlTotal;
         this.stlDisponible = stlDisponible;
@@ -84,10 +84,10 @@ public class StocklibroEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof StocklibroEntity)) {
+        if (!(object instanceof StockLibroEntity)) {
             return false;
         }
-        StocklibroEntity other = (StocklibroEntity) object;
+        StockLibroEntity other = (StockLibroEntity) object;
         if ((this.stlId == null && other.stlId != null) || (this.stlId != null && !this.stlId.equals(other.stlId))) {
             return false;
         }

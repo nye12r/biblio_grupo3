@@ -55,7 +55,7 @@ public class StockEntity implements Serializable {
     @Column(name = "sto_prestados")
     private long stoPrestados;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "stoId", fetch = FetchType.LAZY)
-    private List<StocklibroEntity> stocklibroList;
+    private List<StockLibroEntity> stocklibroList;
 
     public StockEntity() {
     }
