@@ -86,6 +86,7 @@ insert into stock
 
 
 DROP TABLE stocklibro;
+DROP TABLE stock;
 
 ALTER TABLE libro ADD COLUMN total_ejemplares bigint NOT NULL;
 ALTER TABLE libro ADD COLUMN total_ejemplares_disponibles bigint NOT NULL;
