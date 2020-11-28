@@ -48,8 +48,6 @@ public class StockEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "sto_prestados")
     private long stoPrestados;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stoId", fetch = FetchType.LAZY)
-    private List<StockLibroEntity> stocklibroList;
 
     public StockEntity() {
     }
