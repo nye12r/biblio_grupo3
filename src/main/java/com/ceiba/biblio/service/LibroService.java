@@ -2,6 +2,7 @@ package com.ceiba.biblio.service;
 
 import com.ceiba.biblio.Dto.LibroInDto;
 import com.ceiba.biblio.Dto.LibroOutDto;
+import com.ceiba.biblio.Dto.Utilidades;
 import com.ceiba.biblio.model.LibroEntity;
 import com.ceiba.biblio.repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +24,29 @@ public class LibroService {
     }
 
     public ResponseEntity crearLibro(LibroInDto libro) {
+        LibroEntity libr = null;
         LibroOutDto respuesta = new LibroOutDto();
         Optional<LibroEntity> lib = libroRepository.findByIsbn(libro.getIsbn());
 
-        if (!lib.isPresent()) {
-            LibroEntity libr = new LibroEntity();
+
+        if(lib.isPresent()){
+            libr=lib.get();
+            libr.setTotalEjemplares(libr.getTotalEjemplares()+1);
+            libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles()+1);
+        }else {
+            libr = new LibroEntity();
+            libr.setTotalEjemplares(Long.valueOf(1));
+            libr.setTotalEjemplaresDisponibles(Long.valueOf(1));
             libr.setIsbn(libro.getIsbn());
             libr.setTitulo(libro.getNombreLibro());
             libr.setLibEspalindrome(esPalindrome(libro.getIsbn()));
-            libr.setLibEsconlimite(true);
-            libr.setTotalEjemplares(Long.valueOf(100));
-            libr.setTotalEjemplaresDisponibles(Long.valueOf(99));
-            libr.setTotalEjemplaresPrestados(Long.valueOf(1));
-            libroRepository.save(libr);
-            respuesta.setEstado("OK");
-            respuesta.setMensaje("Libro guardado correctamente");
-            return ResponseEntity.ok(respuesta);
+            libr.setLibEsconlimite(Utilidades.isOverThirty(libro.getIsbn()));
+            libr.setTotalEjemplaresPrestados(Long.valueOf(0));
         }
-        respuesta.setEstado("Mal");
-        respuesta.setMensaje("Libro no se guardado correctamente");
-        return ResponseEntity.badRequest().body(respuesta);
-
+        libroRepository.save(libr);
+        respuesta.setEstado("OK");
+        respuesta.setMensaje("Libro guardado correctamente");
+        return ResponseEntity.ok(respuesta);
 
     }
 
@@ -52,5 +55,4 @@ public class LibroService {
         return IntStream.range(0, isbnTemporal.length() / 2)
                 .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
     }
-
 }
