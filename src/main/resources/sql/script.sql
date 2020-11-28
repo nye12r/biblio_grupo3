@@ -89,5 +89,4 @@ DROP TABLE stocklibro;
 
 ALTER TABLE libro ADD COLUMN estado_libro varchar(15);
 ALTER TABLE libro ADD COLUMN total_ejemplares int NOT NULL;
-ALTER TABLE libro ADD COLUMN total_ejemplares_disponibles int NOT NULL;
 ALTER TABLE libro ADD COLUMN total_ejemplares_prestado int NOT NULL;
