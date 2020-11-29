@@ -44,12 +44,13 @@ public class Utilidades {
         return isOver;
     }
 
-    public Date addDaysDate(Date date, int days) {//bien
+    public static Date addDaysDate(Date date, int days) {//bien
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_YEAR, days);
         return calendar.getTime();
     }
+    
     public static Date addDays(Date date, int days) {//bien
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -82,7 +83,7 @@ public class Utilidades {
         return stringDate;
     }
 
-    private Calendar convertDateToCalendar(Date date) {
+    public static Calendar convertDateToCalendar(Date date) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -90,8 +91,7 @@ public class Utilidades {
 
     }
     
-
-    public int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
+    public static int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
 
         int diffDays = 0;
 
@@ -109,7 +109,7 @@ public class Utilidades {
 
     }
 
-    public boolean isSunday(Date date){
+    public static boolean isSunday(Date date){
         boolean isSund=false;
         Calendar fechaInicial= convertDateToCalendar(date);
         if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
