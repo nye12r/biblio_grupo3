@@ -34,7 +34,7 @@ public class PrestamoService {
     @Autowired
     private LibroRepository libroRepository;
     
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public ResponseEntity prestarLibro(PrestamoInDto prestamo) {
         Optional<LibroEntity> lib = libroRepository.findByIsbn(prestamo.getIsbn());
         
