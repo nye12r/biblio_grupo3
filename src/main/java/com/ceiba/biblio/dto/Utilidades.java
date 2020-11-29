@@ -106,7 +106,7 @@ public class Utilidades {
         boolean isSund = false;
         Calendar fechaInicial = convertDateToCalendar(date);
         if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-            isSund = false;
+            isSund = true;
 
         }
 
