@@ -49,6 +49,25 @@ public class LibroService {
         return ResponseEntity.ok(respuesta);
 
     }
+    
+    public ResponseEntity eliminarLibro(LibroInDto libro) {
+        LibroEntity libr = null;
+        LibroOutDto respuesta = new LibroOutDto();
+        Optional<LibroEntity> lib = libroRepository.findByIsbn(libro.getIsbn());
+
+        if(lib.isPresent()){
+            libr=lib.get();
+            libr.setTotalEjemplares(libr.getTotalEjemplares()+1);
+            libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles()+1);
+            respuesta.setEstado("OK");
+            respuesta.setMensaje("Libro eliminado correctamente");
+            libroRepository.delete(libr);
+        }else {
+            respuesta.setEstado("MAL");
+            respuesta.setMensaje("Libro no eliminado, no Existe");
+        }
+        return ResponseEntity.ok(respuesta);
+    }
 
     public boolean esPalindrome(String isbn){
         String isbnTemporal  = isbn.replaceAll("\\s+", "").toLowerCase();

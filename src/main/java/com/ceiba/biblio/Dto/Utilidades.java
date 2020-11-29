@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -13,19 +14,10 @@ import java.util.regex.Pattern;
  */
 public class Utilidades {
 
-    public static boolean isPalindrome(String cadena) { //Bien
-        int fin = cadena.length() - 1;
-        int ini = 0;
-        boolean ispalindrome = true;
-
-        while (ini < fin) {
-            if (cadena.charAt(ini) != cadena.charAt(fin)) {
-                ispalindrome = false;
-            }
-            ini++;
-            fin--;
-        }
-        return ispalindrome;
+    public static boolean isPalindrome(String isbn) { //Bien
+        String isbnTemporal  = isbn.replaceAll("\\s+", "").toLowerCase();
+        return IntStream.range(0, isbnTemporal.length() / 2)
+                .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
     }
     
     public static String getOnlyDigits(String s) { //bien
