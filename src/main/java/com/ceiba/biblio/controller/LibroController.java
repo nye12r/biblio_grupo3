@@ -25,4 +25,9 @@ public class LibroController {
         return  libroService.crearLibro(libro);
     }
     
+    @PostMapping("/eliminarLibro")
+    public ResponseEntity eliminarLibro(@RequestBody LibroInDto libro){
+        return  libroService.eliminarLibro(libro);
+    }
+    
 }
