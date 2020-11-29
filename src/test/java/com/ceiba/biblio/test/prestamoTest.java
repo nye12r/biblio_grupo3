@@ -5,9 +5,9 @@
  */
 package com.ceiba.biblio.test;
 
-import com.ceiba.biblio.Dto.LibroInDto;
-import com.ceiba.biblio.Dto.PrestamoInDto;
-import com.ceiba.biblio.Dto.Utilidades;
+import com.ceiba.biblio.dto.LibroInDto;
+import com.ceiba.biblio.dto.PrestamoInDto;
+import com.ceiba.biblio.dto.Utilidades;
 import com.ceiba.biblio.service.LibroService;
 import com.ceiba.biblio.service.PrestamoService;
 import org.junit.Test;

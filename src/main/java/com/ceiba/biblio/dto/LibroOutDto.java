@@ -1,4 +1,4 @@
-package com.ceiba.biblio.Dto;
+package com.ceiba.biblio.dto;
 
 import lombok.Data;
 import lombok.ToString;

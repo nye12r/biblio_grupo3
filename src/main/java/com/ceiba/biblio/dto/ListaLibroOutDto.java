@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ceiba.biblio.Dto;
+package com.ceiba.biblio.dto;
+
 
 import lombok.Data;
 import lombok.ToString;
 
-import java.io.Serializable;
+import java.util.Date;
 
 /**
- * @author gustavo
+ * @author angie.jaramillo
  */
+
 @Data
 @ToString
-public class PrestamoInDto implements Serializable {
-
-    private String persona;
+public class ListaLibroOutDto {
     private String isbn;
-
+    private String nombreLibro;
+    private String nombrePersona;
+    private Date fechaLimite;
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ceiba.biblio.Dto;
+package com.ceiba.biblio.dto;
 
 import lombok.Data;
 import lombok.ToString;

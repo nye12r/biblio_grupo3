@@ -5,9 +5,9 @@
  */
 package com.ceiba.biblio.service;
 
-import com.ceiba.biblio.Dto.PrestamoInDto;
-import com.ceiba.biblio.Dto.PrestamoOutDto;
-import com.ceiba.biblio.Dto.Utilidades;
+import com.ceiba.biblio.dto.PrestamoInDto;
+import com.ceiba.biblio.dto.PrestamoOutDto;
+import com.ceiba.biblio.dto.Utilidades;
 import com.ceiba.biblio.model.LibroEntity;
 import com.ceiba.biblio.model.PrestamoEntity;
 import com.ceiba.biblio.repository.LibroRepository;

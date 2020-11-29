@@ -1,9 +1,9 @@
 package com.ceiba.biblio.service;
 
-import com.ceiba.biblio.Dto.LibroInDto;
-import com.ceiba.biblio.Dto.LibroOutDto;
-import com.ceiba.biblio.Dto.ListaLibroOutDto;
-import com.ceiba.biblio.Dto.Utilidades;
+import com.ceiba.biblio.dto.LibroInDto;
+import com.ceiba.biblio.dto.LibroOutDto;
+import com.ceiba.biblio.dto.ListaLibroOutDto;
+import com.ceiba.biblio.dto.Utilidades;
 import com.ceiba.biblio.model.LibroEntity;
 import com.ceiba.biblio.model.PrestamoEntity;
 import com.ceiba.biblio.repository.LibroRepository;
@@ -47,7 +47,7 @@ public class LibroService {
             libr.setTotalEjemplaresDisponibles(Long.valueOf(1));
             libr.setIsbn(libro.getIsbn());
             libr.setTitulo(libro.getNombreLibro());
-            libr.setLibEspalindrome(esPalindrome(libro.getIsbn()));
+            libr.setLibEspalindrome(Utilidades.isPalindrome(libro.getIsbn()));
             libr.setLibEsconlimite(Utilidades.isOverThirty(libro.getIsbn()));
             libr.setTotalEjemplaresPrestados(Long.valueOf(0));
             respuesta.setMensaje("Libro fue actualizado");
@@ -89,12 +89,6 @@ public class LibroService {
             respuesta.setMensaje("Libro no eliminado, no Existe");
         }
         return ResponseEntity.ok(respuesta);
-    }
-
-    public boolean esPalindrome(String isbn) {
-        String isbnTemporal = isbn.replaceAll("\\s+", "").toLowerCase();
-        return IntStream.range(0, isbnTemporal.length() / 2)
-                .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
     }
 
     public ResponseEntity consultarLibros() {

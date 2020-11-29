@@ -1,9 +1,11 @@
-package com.ceiba.biblio.Dto;
+package com.ceiba.biblio.dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -13,6 +15,7 @@ import java.util.stream.IntStream;
  */
 public class Utilidades {
 
+    private final static Logger LOGGER = Logger.getLogger("bitacora.subnivel.Utilidades");
     public static boolean isPalindrome(String isbn) { //Bien
         String isbnTemporal = isbn.replaceAll("\\s+", "").toLowerCase();
         return IntStream.range(0, isbnTemporal.length() / 2)
@@ -30,7 +33,6 @@ public class Utilidades {
         boolean isOver = false;
         int calculate = 0;
         cadena = getOnlyDigits(cadena);
-        System.out.println(cadena);
         int ini = 0;
         while (ini < (cadena.length() - 1)) {
             calculate = calculate + (Integer.parseInt(String.valueOf(cadena.charAt(ini))));
@@ -70,7 +72,7 @@ public class Utilidades {
         try {
             outDate = format.parse(date);
         } catch (ParseException ex) {
-            System.out.println(ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage());
         }
         return outDate;
     }
@@ -90,21 +92,14 @@ public class Utilidades {
     }
 
     public static int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
-
         int diffDays = 0;
-
         while (fechaInicial.before(fechaFinal) || fechaInicial.equals(fechaFinal)) {
-
             if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-
                 diffDays++;
             }
-
             fechaInicial.add(Calendar.DATE, 1);
-
         }
         return diffDays;
-
     }
 
     public static boolean isSunday(Date date) {
