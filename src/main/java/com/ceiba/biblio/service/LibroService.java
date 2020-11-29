@@ -62,32 +62,29 @@ public class LibroService {
         LibroEntity libr = null;
         LibroOutDto respuesta = new LibroOutDto();
         Optional<LibroEntity> lib = libroRepository.findByIsbn(libro.getIsbn());
-
-        if (lib.isPresent()) {
-            libr = lib.get();
-            if (libr.getTotalEjemplares() > 1) {
-                libr.setTotalEjemplares(libr.getTotalEjemplares() - 1);
-                libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() - 1);
-                respuesta.setEstado("OK");
-                respuesta.setMensaje("Libro eliminado correctamente");
-                libroRepository.save(libr);
-            } else if (libr.getTotalEjemplaresDisponibles() == 0
-                    && libr.getTotalEjemplaresPrestados() == 0
-                    && libr.getTotalEjemplares() == 1) {
-                libr.setTotalEjemplares(libr.getTotalEjemplares() + 1);
-                libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() + 1);
-                respuesta.setEstado("OK");
-                respuesta.setMensaje("Libro eliminado correctamente");
-                libroRepository.delete(libr);
-            } else if (libr.getTotalEjemplaresDisponibles() == 0 && libr.getTotalEjemplaresPrestados() > 0) {
-                respuesta.setEstado("MAL");
-                respuesta.setMensaje("Libro no se puede eliminar. hay libros prestados.");
-            }
-
-        } else {
-            respuesta.setEstado("MAL");
-            respuesta.setMensaje("Libro no eliminado, no Existe");
+        
+        if (!lib.isPresent()) {
+            return ResponseEntity.badRequest().body("Libro no eliminado, no Existe");
         }
+        libr = lib.get();
+        if (libr.getTotalEjemplares() == 0) {
+            return ResponseEntity.badRequest().body("El libro indicado no tiene ejemplares");
+        }
+        if (libr.getTotalEjemplaresDisponibles() == 0) {
+            return ResponseEntity.badRequest().body("El libro indicado tiene todos sus ejemplares en prestamo");
+        }
+        if (libr.getTotalEjemplares() == 1) {
+            libroRepository.delete(libr);
+            respuesta.setEstado("OK");
+            respuesta.setMensaje("Libro eliminado correctamente");
+        } else {
+            libr.setTotalEjemplares(libr.getTotalEjemplares() - 1);
+            libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() - 1);
+            libroRepository.save(libr);
+            respuesta.setEstado("OK");
+            respuesta.setMensaje("ejemplar eliminado correctamente");
+        }
+        
         return ResponseEntity.ok(respuesta);
     }
 
