@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 @Service
 public class LibroService {
@@ -62,7 +61,7 @@ public class LibroService {
         LibroEntity libr = null;
         LibroOutDto respuesta = new LibroOutDto();
         Optional<LibroEntity> lib = libroRepository.findByIsbn(libro.getIsbn());
-        
+
         if (!lib.isPresent()) {
             return ResponseEntity.badRequest().body("Libro no eliminado, no Existe");
         }
@@ -84,7 +83,7 @@ public class LibroService {
             respuesta.setEstado("OK");
             respuesta.setMensaje("ejemplar eliminado correctamente");
         }
-        
+
         return ResponseEntity.ok(respuesta);
     }
 

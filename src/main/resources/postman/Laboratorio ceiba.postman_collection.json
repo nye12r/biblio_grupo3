@@ -1,48 +1,48 @@
 {
-	"info": {
-		"_postman_id": "8ea1407f-710a-4864-95f0-d4e5e439f0fc",
-		"name": "Laboratorio ceiba",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "POSTMAN PROBAR SERVICIO LIBRO",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POSTMAN CREAR LIBRO",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\r\n\t\t\"isbn\" : \"2A5B3B5A2\",\r\n\t\t\"nombreLibro\" : \"LAS AVENTURAS DE TOM SAWYWER\"\r\n\t\t\r\n\t}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/crearLibro",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"crearLibro"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"protocolProfileBehavior": {}
+  "info": {
+    "_postman_id": "8ea1407f-710a-4864-95f0-d4e5e439f0fc",
+    "name": "Laboratorio ceiba",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POSTMAN PROBAR SERVICIO LIBRO",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POSTMAN CREAR LIBRO",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\r\n\t\t\"isbn\" : \"2A5B3B5A2\",\r\n\t\t\"nombreLibro\" : \"LAS AVENTURAS DE TOM SAWYWER\"\r\n\t\t\r\n\t}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/crearLibro",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "crearLibro"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

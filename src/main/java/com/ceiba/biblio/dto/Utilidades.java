@@ -16,6 +16,7 @@ import java.util.stream.IntStream;
 public class Utilidades {
 
     private final static Logger LOGGER = Logger.getLogger("bitacora.subnivel.Utilidades");
+
     public static boolean isPalindrome(String isbn) { //Bien
         String isbnTemporal = isbn.replaceAll("\\s+", "").toLowerCase();
         return IntStream.range(0, isbnTemporal.length() / 2)
