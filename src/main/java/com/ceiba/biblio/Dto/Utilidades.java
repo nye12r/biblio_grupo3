@@ -89,6 +89,7 @@ public class Utilidades {
         return calendar;
 
     }
+    
 
     public int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
 
@@ -108,4 +109,14 @@ public class Utilidades {
 
     }
 
+    public boolean isSunday(Date date){
+        boolean isSund=false;
+        Calendar fechaInicial= convertDateToCalendar(date);
+        if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                isSund=false;
+                
+            }
+
+        return isSund;   
+    }
 }
