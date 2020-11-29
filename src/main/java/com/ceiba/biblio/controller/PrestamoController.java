@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- *
  * @author gustavo
  */
 @Controller
 public class PrestamoController {
-    
+
     @Autowired
     private PrestamoService prestamoService;
-    
+
     @PostMapping("/prestar")
-    public ResponseEntity prestarLibro(@RequestBody PrestamoInDto prestamo){
-        return  prestamoService.prestarLibro(prestamo);
+    public ResponseEntity prestarLibro(@RequestBody PrestamoInDto prestamo) {
+        return prestamoService.prestarLibro(prestamo);
     }
-    
+
 }

@@ -5,39 +5,33 @@ import com.ceiba.biblio.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@Controller
 public class LibroController {
-    
+
     @Autowired
     private LibroService libroService;
-    
+
     @GetMapping("/getInfo")
-    public ResponseEntity getInfo(){
+    public ResponseEntity getInfo() {
         return libroService.getInfo();
     }
 
     @PostMapping("/crearLibro")
-    public ResponseEntity crearLibro(@RequestBody LibroInDto libro){
-        return  libroService.crearLibro(libro);
+    public ResponseEntity crearLibro(@RequestBody LibroInDto libro) {
+        return libroService.crearLibro(libro);
     }
-    
+
     @GetMapping("/consultarLibros")
     public ResponseEntity consultarLibros() {
         return libroService.consultarLibros();
     }
-    
+
     @PostMapping("/eliminarLibro")
-    public ResponseEntity eliminarLibro(@RequestBody LibroInDto libro){
-        return  libroService.eliminarLibro(libro);
+    public ResponseEntity eliminarLibro(@RequestBody LibroInDto libro) {
+        return libroService.eliminarLibro(libro);
     }
-    
+
 }

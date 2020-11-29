@@ -12,32 +12,31 @@ import com.ceiba.biblio.model.LibroEntity;
 import com.ceiba.biblio.model.PrestamoEntity;
 import com.ceiba.biblio.repository.LibroRepository;
 import com.ceiba.biblio.repository.PrestamoRepository;
-import java.util.Date;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mapping.AccessOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.Optional;
+
 /**
- *
  * @author gustavo
  */
 @Service
 public class PrestamoService {
-    
+
     @Autowired
     private PrestamoRepository prestamoRepository;
-    
+
     @Autowired
     private LibroRepository libroRepository;
-    
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public ResponseEntity prestarLibro(PrestamoInDto prestamo) {
         Optional<LibroEntity> lib = libroRepository.findByIsbn(prestamo.getIsbn());
-        
+
         if (!lib.isPresent()) {
             return ResponseEntity.badRequest().body("El libro indicado no se encuentra registrado");
         }
@@ -56,17 +55,17 @@ public class PrestamoService {
             pres.setPresFechalimite(Utilidades.addDays(pres.getPresFechaprestamo(), 15));
         }
         prestamoRepository.save(pres);
-        
+
         libro.setTotalEjemplaresDisponibles(libro.getTotalEjemplaresDisponibles() - 1);
         libro.setTotalEjemplaresPrestados(libro.getTotalEjemplaresPrestados() + 1);
-        
+
         libroRepository.save(libro);
-        
+
         PrestamoOutDto salida = new PrestamoOutDto();
         salida.setEstado("OK");
         salida.setMensaje("prestamo registrado correctamente");
         return ResponseEntity.ok(salida);
-        
+
     }
-    
+
 }

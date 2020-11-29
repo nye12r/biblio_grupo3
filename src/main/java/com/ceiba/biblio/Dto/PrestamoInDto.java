@@ -5,13 +5,12 @@
  */
 package com.ceiba.biblio.Dto;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
- *
  * @author gustavo
  */
 @Data

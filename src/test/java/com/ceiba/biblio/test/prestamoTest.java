@@ -6,19 +6,19 @@
 package com.ceiba.biblio.test;
 
 import com.ceiba.biblio.Dto.Utilidades;
-import java.util.Date;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 /**
- *
  * @author gustavo
  */
 
 public class prestamoTest {
-    
+
     @Test
     public void probarFechas() {
         Utilidades.addDays(new Date(), 15);
     }
-    
+
 }

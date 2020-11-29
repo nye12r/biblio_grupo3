@@ -4,13 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 /**
- *
  * @author ingdanilosegura
  */
 public class Utilidades {
@@ -50,7 +48,7 @@ public class Utilidades {
         calendar.add(Calendar.DAY_OF_YEAR, days);
         return calendar.getTime();
     }
-    
+
     public static Date addDays(Date date, int days) {//bien
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -90,7 +88,7 @@ public class Utilidades {
         return calendar;
 
     }
-    
+
     public static int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
 
         int diffDays = 0;
@@ -109,14 +107,14 @@ public class Utilidades {
 
     }
 
-    public static boolean isSunday(Date date){
-        boolean isSund=false;
-        Calendar fechaInicial= convertDateToCalendar(date);
+    public static boolean isSunday(Date date) {
+        boolean isSund = false;
+        Calendar fechaInicial = convertDateToCalendar(date);
         if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                isSund=false;
-                
-            }
+            isSund = false;
 
-        return isSund;   
+        }
+
+        return isSund;
     }
 }
