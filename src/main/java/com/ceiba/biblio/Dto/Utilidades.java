@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -15,17 +16,17 @@ import java.util.stream.IntStream;
 public class Utilidades {
 
     public static boolean isPalindrome(String isbn) { //Bien
-        String isbnTemporal  = isbn.replaceAll("\\s+", "").toLowerCase();
+        String isbnTemporal = isbn.replaceAll("\\s+", "").toLowerCase();
         return IntStream.range(0, isbnTemporal.length() / 2)
                 .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
     }
-    
+
     public static String getOnlyDigits(String s) { //bien
-    Pattern pattern = Pattern.compile("[^0-9]"); 
-    Matcher matcher = pattern.matcher(s); 
-    String number = matcher.replaceAll(""); 
-    return number; 
-}
+        Pattern pattern = Pattern.compile("[^0-9]");
+        Matcher matcher = pattern.matcher(s);
+        String number = matcher.replaceAll("");
+        return number;
+    }
 
     public static boolean isOverThirty(String cadena) {//bien
         boolean isOver = false;
@@ -43,12 +44,13 @@ public class Utilidades {
         return isOver;
     }
 
-    public Date addDaysDate(Date date, int days) {//bien
+    public static Date addDaysDate(Date date, int days) {//bien
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_YEAR, days);
         return calendar.getTime();
     }
+    
     public static Date addDays(Date date, int days) {//bien
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -81,5 +83,40 @@ public class Utilidades {
         return stringDate;
     }
 
+    public static Calendar convertDateToCalendar(Date date) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+
+    }
     
+    public static int getSundayDays(Calendar fechaInicial, Calendar fechaFinal) {
+
+        int diffDays = 0;
+
+        while (fechaInicial.before(fechaFinal) || fechaInicial.equals(fechaFinal)) {
+
+            if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+
+                diffDays++;
+            }
+
+            fechaInicial.add(Calendar.DATE, 1);
+
+        }
+        return diffDays;
+
+    }
+
+    public static boolean isSunday(Date date){
+        boolean isSund=false;
+        Calendar fechaInicial= convertDateToCalendar(date);
+        if (fechaInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                isSund=false;
+                
+            }
+
+        return isSund;   
+    }
 }

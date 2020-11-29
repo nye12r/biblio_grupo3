@@ -2,21 +2,32 @@ package com.ceiba.biblio.service;
 
 import com.ceiba.biblio.Dto.LibroInDto;
 import com.ceiba.biblio.Dto.LibroOutDto;
+import com.ceiba.biblio.Dto.ListaLibroOutDto;
 import com.ceiba.biblio.Dto.Utilidades;
 import com.ceiba.biblio.model.LibroEntity;
+import com.ceiba.biblio.model.PrestamoEntity;
 import com.ceiba.biblio.repository.LibroRepository;
+import com.ceiba.biblio.repository.PrestamoRepository;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
+import lombok.experimental.var;
+import org.springframework.http.HttpHeaders;
 
 @Service
 public class LibroService {
     
     @Autowired
     private LibroRepository libroRepository;
+    
+    @Autowired
+    private PrestamoRepository prestamoRepository;
     
     public ResponseEntity getInfo(){
         
@@ -73,5 +84,34 @@ public class LibroService {
         String isbnTemporal  = isbn.replaceAll("\\s+", "").toLowerCase();
         return IntStream.range(0, isbnTemporal.length() / 2)
                 .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
+    }
+    
+    public ResponseEntity consultarLibros(){
+        
+        List<ListaLibroOutDto> listadoLibros = new ArrayList<>();
+
+        List<LibroEntity> lib = libroRepository.findAll();
+        for(LibroEntity i : lib){
+            ListaLibroOutDto libDto = new ListaLibroOutDto();
+            List<PrestamoEntity> prestamo = prestamoRepository.findByLibId(i);
+            if(prestamo.isEmpty()){
+                libDto.setFechaLimite(null);
+                libDto.setNombrePersona("");
+                libDto.setNombreLibro(i.getTitulo());
+                libDto.setIsbn(i.getIsbn());
+                listadoLibros.add(libDto);
+            }else{
+                for(PrestamoEntity p : prestamo){
+                    libDto = new ListaLibroOutDto();
+                    libDto.setFechaLimite(p.getPresFechalimite());
+                    libDto.setNombrePersona(p.getPresNombrepersona());
+                    libDto.setNombreLibro(i.getTitulo());
+                    libDto.setIsbn(i.getIsbn());
+                    listadoLibros.add(libDto);
+                }
+            }
+        }
+        
+        return ResponseEntity.ok(listadoLibros);
     }
 }

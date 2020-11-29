@@ -5,10 +5,15 @@ import com.ceiba.biblio.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@CrossOrigin(origins = "*")
 @Controller
 public class LibroController {
     
@@ -23,6 +28,11 @@ public class LibroController {
     @PostMapping("/crearLibro")
     public ResponseEntity crearLibro(@RequestBody LibroInDto libro){
         return  libroService.crearLibro(libro);
+    }
+    
+    @GetMapping("/consultarLibros")
+    public ResponseEntity consultarLibros() {
+        return libroService.consultarLibros();
     }
     
     @PostMapping("/eliminarLibro")
