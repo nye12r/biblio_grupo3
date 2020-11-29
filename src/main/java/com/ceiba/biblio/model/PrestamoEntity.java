@@ -47,7 +47,7 @@ public class PrestamoEntity implements Serializable {
     @Column(name = "pres_fechaprestamo")
     @Temporal(TemporalType.TIMESTAMP)
     private Date presFechaprestamo;
-    @Column(name = "pres_fechalimite")
+    @Column(name = "pres_fechalimite", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date presFechalimite;
     @JoinColumn(name = "lib_id", referencedColumnName = "lib_id")
