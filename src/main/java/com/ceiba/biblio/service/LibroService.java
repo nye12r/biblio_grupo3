@@ -65,11 +65,25 @@ public class LibroService {
 
         if (lib.isPresent()) {
             libr = lib.get();
-            libr.setTotalEjemplares(libr.getTotalEjemplares() + 1);
-            libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() + 1);
-            respuesta.setEstado("OK");
-            respuesta.setMensaje("Libro eliminado correctamente");
-            libroRepository.delete(libr);
+            if (libr.getTotalEjemplares() > 1) {
+                libr.setTotalEjemplares(libr.getTotalEjemplares() - 1);
+                libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() - 1);
+                respuesta.setEstado("OK");
+                respuesta.setMensaje("Libro eliminado correctamente");
+                libroRepository.save(libr);
+            } else if (libr.getTotalEjemplaresDisponibles() == 0
+                    && libr.getTotalEjemplaresPrestados() == 0
+                    && libr.getTotalEjemplares() == 1) {
+                libr.setTotalEjemplares(libr.getTotalEjemplares() + 1);
+                libr.setTotalEjemplaresDisponibles(libr.getTotalEjemplaresDisponibles() + 1);
+                respuesta.setEstado("OK");
+                respuesta.setMensaje("Libro eliminado correctamente");
+                libroRepository.delete(libr);
+            } else if (libr.getTotalEjemplaresDisponibles() == 0 && libr.getTotalEjemplaresPrestados() > 0) {
+                respuesta.setEstado("MAL");
+                respuesta.setMensaje("Libro no se puede eliminar. hay libros prestados.");
+            }
+
         } else {
             respuesta.setEstado("MAL");
             respuesta.setMensaje("Libro no eliminado, no Existe");
