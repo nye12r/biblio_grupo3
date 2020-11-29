@@ -57,6 +57,20 @@ public class Utilidades {
         calendar.add(Calendar.DAY_OF_YEAR, days);
         return calendar.getTime();
     }
+    public static Date addDays(Date date, int days) {//bien
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int i = 0;
+        while (i < days) {
+            if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+                i++;
+            }
+            if (i < days) {
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+            }
+        }
+        return calendar.getTime();
+    }
 
     public static Date convertStringToDate(String date) {//bien
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
