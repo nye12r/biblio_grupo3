@@ -35,7 +35,7 @@ public class Utilidades {
         int calculate = 0;
         cadena = getOnlyDigits(cadena);
         int ini = 0;
-        while (ini < (cadena.length() - 1)) {
+        while (ini < cadena.length()) {
             calculate = calculate + (Integer.parseInt(String.valueOf(cadena.charAt(ini))));
             ini++;
         }
