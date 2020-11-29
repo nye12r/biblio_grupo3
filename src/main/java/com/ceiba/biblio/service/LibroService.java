@@ -86,36 +86,30 @@ public class LibroService {
                 .noneMatch(i -> isbnTemporal.charAt(i) != isbnTemporal.charAt(isbnTemporal.length() - i - 1));
     }
     
-    public ResponseEntity consultarLibro(String isbn){
+    public ResponseEntity consultarLibros(){
         
-        ArrayList<Optional<LibroEntity>> libros = new ArrayList<Optional<LibroEntity>>();
         List<ListaLibroOutDto> listadoLibros = new ArrayList<>();
-        if(isbn == null || isbn.equals("")){
-            List<LibroEntity> lib = libroRepository.findAll();
-            for(LibroEntity i : lib){
-                ListaLibroOutDto libDto = new ListaLibroOutDto();
-                List<PrestamoEntity> prestamo = prestamoRepository.findByLibId(i);
-                if(prestamo.isEmpty()){
-                    libDto.setFechaLimite(null);
-                    libDto.setNombrePersona("");
+
+        List<LibroEntity> lib = libroRepository.findAll();
+        for(LibroEntity i : lib){
+            ListaLibroOutDto libDto = new ListaLibroOutDto();
+            List<PrestamoEntity> prestamo = prestamoRepository.findByLibId(i);
+            if(prestamo.isEmpty()){
+                libDto.setFechaLimite(null);
+                libDto.setNombrePersona("");
+                libDto.setNombreLibro(i.getTitulo());
+                libDto.setIsbn(i.getIsbn());
+                listadoLibros.add(libDto);
+            }else{
+                for(PrestamoEntity p : prestamo){
+                    libDto = new ListaLibroOutDto();
+                    libDto.setFechaLimite(p.getPresFechalimite());
+                    libDto.setNombrePersona(p.getPresNombrepersona());
                     libDto.setNombreLibro(i.getTitulo());
                     libDto.setIsbn(i.getIsbn());
                     listadoLibros.add(libDto);
-                }else{
-                    for(PrestamoEntity p : prestamo){
-                        libDto = new ListaLibroOutDto();
-                        libDto.setFechaLimite(p.getPresFechalimite());
-                        libDto.setNombrePersona(p.getPresNombrepersona());
-                        libDto.setNombreLibro(i.getTitulo());
-                        libDto.setIsbn(i.getIsbn());
-                        listadoLibros.add(libDto);
-                    }
                 }
-               
             }
-            
-        }else{
-            libros.add(libroRepository.findByIsbn(isbn));
         }
         
         return ResponseEntity.ok(listadoLibros);

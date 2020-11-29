@@ -30,9 +30,9 @@ public class LibroController {
         return  libroService.crearLibro(libro);
     }
     
-    @GetMapping("/buscar")
-    public ResponseEntity buscar() {
-        return libroService.consultarLibro("");
+    @GetMapping("/consultarLibros")
+    public ResponseEntity consultarLibros() {
+        return libroService.consultarLibros();
     }
     
     @PostMapping("/eliminarLibro")
